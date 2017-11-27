@@ -19,7 +19,7 @@ public class PostToPHP {
 	public static void insertFileIntoDB(String path) {
 		/* create a new URL and open a connection */
 		try {
-			URL url = new URL("http://localhost/dagr_database/php/insert.php");
+			URL url = new URL("http://localhost/xampp_dagr_database/php/insert.php");
 			URLConnection con = url.openConnection();
 			HttpURLConnection http = (HttpURLConnection)con;
 			http.setRequestMethod("POST");
