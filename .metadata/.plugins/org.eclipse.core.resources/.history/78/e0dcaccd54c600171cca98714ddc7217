@@ -1,0 +1,31 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileOwnerAttributeView;
+import java.nio.file.attribute.UserPrincipal;
+
+public class FileMetadataRetriever {
+	
+	public static void main(String[] args) {
+		Path path = Paths.get("C:\\Users\\Jack\\Documents\\CMSC424\\project\\Extension\\homepage.html");
+	    FileOwnerAttributeView ownerView = Files.getFileAttributeView(path,
+	        FileOwnerAttributeView.class);
+	    BasicFileAttributeView attributeView =  Files.getFileAttributeView(path,
+	    		BasicFileAttributeView.class);
+	    UserPrincipal userPrincipal;
+	    BasicFileAttributes attributes;
+		try {
+			userPrincipal = ownerView.getOwner();
+			attributes = attributeView.readAttributes();
+			System.out.println(attributes.lastModifiedTime());
+			System.out.println(attributes.size());
+			System.out.println(userPrincipal.getName());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

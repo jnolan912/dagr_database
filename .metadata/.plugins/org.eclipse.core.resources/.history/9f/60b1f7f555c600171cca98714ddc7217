@@ -1,0 +1,23 @@
+import java.io.IOException;
+import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.nio.file.attribute.FileOwnerAttributeView;
+import java.nio.file.attribute.FileTime;
+
+public class Attributes {
+	String owner = null;
+	long size;
+	FileTime lastModifiedTime = null;
+	public Attributes(FileOwnerAttributeView ownerView,  
+		BasicFileAttributeView attributeView) {
+		try {
+			BasicFileAttributes attributes = attributeView.readAttributes();
+			size = attributes.size();
+			lastModifiedTime = attributes.lastModifiedTime();
+			owner = ownerView.getOwner().getName();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}

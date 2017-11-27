@@ -1,0 +1,107 @@
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+
+
+public class DagrInserterGUI extends JFrame implements ActionListener{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JFrame frame;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+	private JLabel lblPleaseEnterThe;
+	private JLabel lblNumberOfRecords;
+	private JLabel lblSaveLocationOf;
+	private JButton btnCreatetxtFile;
+	private JLabel lblNewLabel;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DagrInserterGUI window = new DagrInserterGUI();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the application.
+	 */
+	public DagrInserterGUI() {
+		initialize();
+	}
+	
+
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame = new JFrame("Image List Editing Assistant");
+		frame.setBounds(100, 100, 750, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//frame.getContentPane().setLayout(new MigLayout("", "[grow]", "[][][][][][][][][][]"));
+		
+		lblPleaseEnterThe = new JLabel("Export all records for all cameras then enter the following information");
+		frame.getContentPane().add(lblPleaseEnterThe, "cell 0 0,alignx center");
+		lblPleaseEnterThe.setFont(lblPleaseEnterThe.getFont().deriveFont(16f));
+		
+		JLabel lblGeneralFileLocation = new JLabel("General file location (Use # to represent camera numbers, i.e. C:/Users/Jack/Documents/sample_records/camera#)");
+		frame.getContentPane().add(lblGeneralFileLocation, "cell 0 1");
+		
+		textField = new JTextField();
+		frame.getContentPane().add(textField, "cell 0 2,growx");
+		textField.setColumns(10);
+		textField.setToolTipText("Enter the save location of the exported records");
+		
+		lblNumberOfRecords = new JLabel("Number of records");
+		frame.getContentPane().add(lblNumberOfRecords, "cell 0 3");
+		
+		textField_1 = new JTextField();
+		frame.getContentPane().add(textField_1, "cell 0 4,growx");
+		textField_1.setColumns(10);
+		textField_1.setToolTipText("Enter the number of records");
+		
+		lblSaveLocationOf = new JLabel("Save location of created .txt file (i.e. C:/Users/Jack/Documents/sample_records/output.txt)");
+		frame.getContentPane().add(lblSaveLocationOf, "cell 0 5");
+		
+		textField_2 = new JTextField();
+		frame.getContentPane().add(textField_2, "cell 0 6,growx");
+		textField_2.setColumns(10);
+		textField_2.setToolTipText("This is where the new text file that is created will be saved");
+		
+		btnCreatetxtFile = new JButton("Create .txt file");
+		frame.getContentPane().add(btnCreatetxtFile, "cell 0 8,alignx center");
+		
+		lblNewLabel = new JLabel("");
+		frame.getContentPane().add(lblNewLabel, "cell 0 9");
+		
+		btnCreatetxtFile.addActionListener(this);
+		
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		//RecordSet.generalFileName = textField.getText();
+		//RecordSet.numberOfRecords = Integer.parseInt(textField_1.getText());
+		//RecordSet.outputSaveName = textField_2.getText();
+		//RecordSet.mainActivity();
+		lblNewLabel.setText("Text file saved to " + textField_2.getText());
+	}
+
+}

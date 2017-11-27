@@ -1,0 +1,66 @@
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.*;
+
+public class DagrInserterGUI {  
+	public DagrInserterGUI() {
+		JLabel title = new JLabel("DAGR Inserter");
+		JLabel selectFileLabel = new JLabel("Single File Inserter");
+		JLabel subtitle2 = new JLabel("Multiple File Inserter");
+		JTextField selectedFileTextField = new JTextField();
+		
+	    JButton selectFileButton = new JButton("Select File");
+	    selectFileButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent ae) {
+	    		JFileChooser fileChooser = new JFileChooser();
+	    		int returnValue = fileChooser.showOpenDialog(null);
+	    		if (returnValue == JFileChooser.APPROVE_OPTION) {
+    				File selectedFile = fileChooser.getSelectedFile();
+    				selectedFileTextField.setText(selectedFile.getAbsolutePath());
+	    		}
+	    	}
+	    });
+	    
+	    JButton submitAddFile = new JButton("Add to Database");
+
+		JPanel buttonPnl = new JPanel(new GridLayout(0,1));
+		buttonPnl.add(selectFileButton);
+		buttonPnl.add(submitAddFile);
+
+		
+		JFrame frame = new JFrame("DAGR Inserter");
+		frame.setLayout(new BorderLayout());
+		title.setHorizontalAlignment(JLabel.CENTER);
+		frame.add(title, BorderLayout.PAGE_START);
+		
+		JPanel contentPnl = new JPanel(new GridLayout(0,1));
+		
+		JPanel selectFilePnl = new JPanel(new BorderLayout());
+		selectFilePnl.add(selectFileLabel, BorderLayout.PAGE_START);
+		selectFilePnl.add(selectedFileTextField, BorderLayout.CENTER);
+		selectFilePnl.add(buttonPnl, BorderLayout.LINE_END);
+		
+		contentPnl.add(selectFilePnl);
+		
+
+		
+		JPanel subtitlePnl2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		subtitlePnl2.add(subtitle2);
+		contentPnl.add(subtitlePnl2);
+
+		frame.add(contentPnl, BorderLayout.CENTER);
+		frame.setVisible(true);
+        frame.setSize(550, 250);
+	}  
+	public static void main(String args[]){  
+		DagrInserterGUI f = new DagrInserterGUI();  
+	}
+	
+	
+}  

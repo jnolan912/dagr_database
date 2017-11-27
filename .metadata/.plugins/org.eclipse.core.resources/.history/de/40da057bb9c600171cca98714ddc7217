@@ -1,0 +1,36 @@
+
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
+import javax.swing.*;
+
+public class DagrInserterGUI {  
+	public DagrInserterGUI() {
+		JLabel title = new JLabel("DAGR Inserter");
+		JLabel subtitle = new JLabel("Single File Inserter");
+		JLabel subtitle2 = new JLabel("Multiple File Inserter");
+
+		
+		JFrame frame = new JFrame("Timer");
+		frame.setLayout(new GridLayout(0,1));
+		title.setHorizontalAlignment(JLabel.CENTER);
+		frame.add(title);
+		
+		JPanel subtitlePnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		subtitlePnl.add(subtitle);
+		frame.add(subtitlePnl);
+
+		
+		JPanel subtitlePnl2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		subtitlePnl2.add(subtitle2);
+		frame.add(subtitlePnl2);
+
+		frame.setVisible(true);
+        frame.setSize(550, 250);
+	}  
+	public static void main(String args[]){  
+		DagrInserterGUI f = new DagrInserterGUI();  
+	}
+	
+	
+}  

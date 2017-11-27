@@ -1,0 +1,56 @@
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.*;
+
+public class DagrInserterGUI {  
+	public DagrInserterGUI() {
+		JLabel title = new JLabel("DAGR Inserter");
+		JLabel subtitle = new JLabel("Single File Inserter");
+		JLabel subtitle2 = new JLabel("Multiple File Inserter");
+	    JButton button = new JButton("Select File");
+	    button.addActionListener(new ActionListener() {
+	      public void actionPerformed(ActionEvent ae) {
+	        JFileChooser fileChooser = new JFileChooser();
+	        int returnValue = fileChooser.showOpenDialog(null);
+	        if (returnValue == JFileChooser.APPROVE_OPTION) {
+	          File selectedFile = fileChooser.getSelectedFile();
+	          System.out.println(selectedFile.getName());
+	        }
+	      }
+	    });
+
+
+		
+		JFrame frame = new JFrame("DAGR Inserter");
+		frame.setLayout(new BorderLayout());
+		title.setHorizontalAlignment(JLabel.CENTER);
+		frame.add(title, BorderLayout.PAGE_START);
+		
+		JPanel contentPnl = new JPanel(new GridLayout(0,1));
+		
+		JPanel subtitlePnl = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		subtitlePnl.add(subtitle);
+		subtitlePnl.add(button);
+		contentPnl.add(subtitlePnl);
+
+		
+		JPanel subtitlePnl2 = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		subtitlePnl2.add(subtitle2);
+		contentPnl.add(subtitlePnl2);
+
+		frame.add(contentPnl, BorderLayout.CENTER);
+		frame.setVisible(true);
+        frame.setSize(550, 250);
+	}  
+	public static void main(String args[]){  
+		DagrInserterGUI f = new DagrInserterGUI();  
+	}
+	
+	
+}  

@@ -1,0 +1,17 @@
+public class FileMetadataRetriever {
+	
+	public static void getFileAttributes(String path) {
+		
+		Attributes attributes = new Attributes(path);
+		System.out.println(attributes.owner);
+		System.out.println(attributes.lastModifiedTime);
+		System.out.println(attributes.size);
+		System.out.println(attributes.fileName);
+		System.out.println(attributes.extension);
+		System.out.println(attributes.path);
+	}
+	
+	public static void main(String[] args) {
+		getFileAttributes("C:\\Users\\Jack\\Documents\\CMSC424\\project\\Extension\\homepage.html");
+	}
+}

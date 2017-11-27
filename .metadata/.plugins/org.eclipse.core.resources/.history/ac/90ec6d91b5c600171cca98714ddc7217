@@ -1,0 +1,36 @@
+
+import java.awt.GridLayout;
+
+import javax.swing.*;
+
+public class DagrInserterGUI extends JFrame{  
+	DagrInserterGUI(){
+		setSize(1000, 1000);
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JLabel individualLabel = new JLabel("Add Individual File");
+		JLabel multipleLabel = new JLabel("Add Files from Folder");
+		JLabel thirdLabel = new JLabel("Label 3");
+		JButton button = new JButton("click me");  
+ 
+		
+		individualLabel.setBounds(0, 0, 0, 12);
+		multipleLabel.setBounds(0, 0, 0, 12);
+		thirdLabel.setBounds(0, 0, 0, 12);
+		//button.setBounds(100, 100, 100, 20);
+
+		
+		/*add(individualLabel);
+		add(multipleLabel);
+		add(thirdLabel);*/
+		add(button); 
+		setLayout(null);
+		
+		setVisible(true);//now frame will be visible, by default not visible  
+	}  
+	public static void main(String args[]){  
+		DagrInserterGUI f = new DagrInserterGUI();  
+	}
+	
+	
+}  

@@ -1,0 +1,24 @@
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.attribute.BasicFileAttributeView;
+import java.nio.file.attribute.FileOwnerAttributeView;
+
+public class FileMetadataRetriever {
+	
+	public static void getFileAttributes(String pathString) {
+		Path path = Paths.get(pathString);
+		FileOwnerAttributeView ownerView = Files.getFileAttributeView(path,
+	        FileOwnerAttributeView.class);
+	    BasicFileAttributeView attributeView =  Files.getFileAttributeView(path,
+	    		BasicFileAttributeView.class);
+		Attributes attributes = new Attributes(ownerView, attributeView);
+		System.out.println(attributes.owner);
+		System.out.println(attributes.lastModifiedTime.toMillis());
+		System.out.println(attributes.size);
+	}
+	
+	public static void main(String[] args) {
+		getFileAttributes("C:\\Users\\Jack\\Documents\\CMSC424\\project\\Extension\\homepage.html");
+	}
+}
