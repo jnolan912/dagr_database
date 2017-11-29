@@ -1,0 +1,117 @@
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.*;
+
+public class DagrInserterGUI {  
+	public DagrInserterGUI() {
+		JLabel title = new JLabel("DAGR Inserter");
+		JLabel selectFileLabel = new JLabel("Single File Inserter");
+		JTextField selectedFileTextField = new JTextField();
+		
+		JLabel categoryNameLabel = new JLabel("CategoryName");
+		JTextField categoryTextField = new JTextField();
+
+		JPanel categoryPnl = new JPanel(new BorderLayout());
+		categoryPnl.add(categoryNameLabel, BorderLayout.PAGE_START);
+		categoryPnl.add(categoryTextField, BorderLayout.CENTER);
+		
+	    JButton selectFileButton = new JButton("Select File");
+	    selectFileButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent ae) {
+	    		JFileChooser fileChooser = new JFileChooser();
+	    		int returnValue = fileChooser.showOpenDialog(null);
+	    		if (returnValue == JFileChooser.APPROVE_OPTION) {
+    				File selectedFile = fileChooser.getSelectedFile();
+    				selectedFileTextField.setText(selectedFile.getAbsolutePath());
+	    		}
+	    	}
+	    }); 
+	    
+	    JButton submitAddFile = new JButton("Add to Database");
+	    
+	    submitAddFile.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent ae) {
+	    		PostToPHP.insertFileIntoDB(selectedFileTextField.getText(), categoryTextField.getText());
+	    	}
+	    });
+	    
+		JPanel contentPnl = new JPanel(new GridLayout(0,1));
+		
+
+
+		contentPnl.add(categoryPnl);
+
+		JPanel singleFileButtonPnl = new JPanel(new GridLayout(0,1));
+		singleFileButtonPnl.add(selectFileButton);
+		singleFileButtonPnl.add(submitAddFile);
+
+		
+		JFrame frame = new JFrame("DAGR Inserter");
+		frame.setLayout(new BorderLayout());
+		title.setHorizontalAlignment(JLabel.CENTER);
+		frame.add(title, BorderLayout.PAGE_START);
+		
+		
+		JPanel selectFilePnl = new JPanel(new BorderLayout());
+		selectFilePnl.add(selectFileLabel, BorderLayout.PAGE_START);
+		selectFilePnl.add(selectedFileTextField, BorderLayout.CENTER);
+		selectFilePnl.add(singleFileButtonPnl, BorderLayout.LINE_END);
+		
+		contentPnl.add(selectFilePnl);
+		
+		
+		JLabel selectFolderLabel = new JLabel("Multiple File Inserter");
+		JTextField selectedFolderTextField = new JTextField();
+		
+	    JButton selectFolderButton = new JButton("Select Folder");
+	    selectFolderButton.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent ae) {
+	    		JFileChooser fileChooser = new JFileChooser();
+	    		fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+	    		int returnValue = fileChooser.showOpenDialog(null);
+	    		if (returnValue == JFileChooser.APPROVE_OPTION) {
+    				File selectedFile = fileChooser.getSelectedFile();
+    				selectedFolderTextField.setText(selectedFile.getAbsolutePath());
+	    		}
+	    	}
+	    });
+	    
+	    JButton submitAddFolder = new JButton("Add to Database");
+	    
+	    JCheckBox includeSubdirectories = new JCheckBox("Include Subdirectories");
+	    
+	    submitAddFolder.addActionListener(new ActionListener() {
+	    	public void actionPerformed(ActionEvent ae) {
+	    		PostToPHP.insertFolder(selectedFolderTextField.getText(), includeSubdirectories.isSelected(), categoryTextField.getText());
+	    	}
+	    });
+
+		JPanel folderButtonPnl = new JPanel(new GridLayout(0,1));
+		folderButtonPnl.add(selectFolderButton);
+		folderButtonPnl.add(submitAddFolder);
+		
+		
+		JPanel selectFolderPnl = new JPanel(new BorderLayout());
+		selectFolderPnl.add(selectFolderLabel, BorderLayout.PAGE_START);
+		selectFolderPnl.add(selectedFolderTextField, BorderLayout.CENTER);
+		selectFolderPnl.add(folderButtonPnl, BorderLayout.LINE_END);
+		selectFolderPnl.add(includeSubdirectories, BorderLayout.PAGE_END);
+		
+		contentPnl.add(selectFolderPnl);
+
+		frame.add(contentPnl, BorderLayout.CENTER);
+		frame.setVisible(true);
+        frame.setSize(550, 300);
+	}  
+	public static void main(String args[]){  
+		DagrInserterGUI f = new DagrInserterGUI();  
+	}
+	
+	
+}  

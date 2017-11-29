@@ -16,7 +16,7 @@ import java.util.StringJoiner;
 import org.apache.commons.io.FileUtils;
 
 public class PostToPHP {
-	public static void insertFileIntoDB(String path) {
+	public static void insertFileIntoDB(String path, String category) {
 		/* create a new URL and open a connection */
 		try {
 			URL url = new URL("http://localhost/xampp_dagr_database/php/insert.php");
@@ -29,7 +29,11 @@ public class PostToPHP {
 			Attributes fileAttributes = new Attributes(path);
 			arguments.put("name", fileAttributes.fileName);
 			arguments.put("owner", fileAttributes.owner);
-			System.out.println(fileAttributes.lastModifiedTime.toString());
+			arguments.put("path", fileAttributes.path);
+			arguments.put("source", "local");
+			arguments.put("mod_time", fileAttributes.lastModifiedTime.toString());
+			arguments.put("category", category);
+
 			StringJoiner sj = new StringJoiner("&");
 			for(Map.Entry<String,String> entry : arguments.entrySet()) {
 			    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" 
@@ -37,6 +41,8 @@ public class PostToPHP {
 			}
 			byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
 			int length = out.length;
+			
+			System.out.println(category);
 			
 			http.setFixedLengthStreamingMode(length);
 			http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
@@ -57,11 +63,11 @@ public class PostToPHP {
 		}
 	}
 	
-	public static void insertFolder(String path, boolean recursive) {
+	public static void insertFolder(String path, boolean recursive, String category) {
 		Iterator<File> filesIterator = FileUtils.iterateFiles(new File(path), null, recursive);
 		while (filesIterator.hasNext()) {
 			File file = filesIterator.next();
-			insertFileIntoDB(file.getAbsolutePath());
+			insertFileIntoDB(file.getAbsolutePath(), category);
 		}
 	}
 	

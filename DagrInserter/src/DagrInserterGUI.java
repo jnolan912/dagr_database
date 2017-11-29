@@ -14,6 +14,13 @@ public class DagrInserterGUI {
 		JLabel selectFileLabel = new JLabel("Single File Inserter");
 		JTextField selectedFileTextField = new JTextField();
 		
+		JLabel categoryNameLabel = new JLabel("CategoryName");
+		JTextField categoryTextField = new JTextField();
+
+		JPanel categoryPnl = new JPanel(new BorderLayout());
+		categoryPnl.add(categoryNameLabel, BorderLayout.PAGE_START);
+		categoryPnl.add(categoryTextField, BorderLayout.CENTER);
+		
 	    JButton selectFileButton = new JButton("Select File");
 	    selectFileButton.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent ae) {
@@ -30,9 +37,15 @@ public class DagrInserterGUI {
 	    
 	    submitAddFile.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent ae) {
-	    		PostToPHP.insertFileIntoDB(selectedFileTextField.getText());
+	    		PostToPHP.insertFileIntoDB(selectedFileTextField.getText(), categoryTextField.getText());
 	    	}
 	    });
+	    
+		JPanel contentPnl = new JPanel(new GridLayout(0,1));
+		
+
+
+		contentPnl.add(categoryPnl);
 
 		JPanel singleFileButtonPnl = new JPanel(new GridLayout(0,1));
 		singleFileButtonPnl.add(selectFileButton);
@@ -44,7 +57,6 @@ public class DagrInserterGUI {
 		title.setHorizontalAlignment(JLabel.CENTER);
 		frame.add(title, BorderLayout.PAGE_START);
 		
-		JPanel contentPnl = new JPanel(new GridLayout(0,1));
 		
 		JPanel selectFilePnl = new JPanel(new BorderLayout());
 		selectFilePnl.add(selectFileLabel, BorderLayout.PAGE_START);
@@ -52,6 +64,7 @@ public class DagrInserterGUI {
 		selectFilePnl.add(singleFileButtonPnl, BorderLayout.LINE_END);
 		
 		contentPnl.add(selectFilePnl);
+		
 		
 		JLabel selectFolderLabel = new JLabel("Multiple File Inserter");
 		JTextField selectedFolderTextField = new JTextField();
@@ -75,7 +88,7 @@ public class DagrInserterGUI {
 	    
 	    submitAddFolder.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent ae) {
-	    		PostToPHP.insertFolder(selectedFolderTextField.getText(), includeSubdirectories.isSelected());
+	    		PostToPHP.insertFolder(selectedFolderTextField.getText(), includeSubdirectories.isSelected(), categoryTextField.getText());
 	    	}
 	    });
 
@@ -94,7 +107,7 @@ public class DagrInserterGUI {
 
 		frame.add(contentPnl, BorderLayout.CENTER);
 		frame.setVisible(true);
-        frame.setSize(550, 250);
+        frame.setSize(550, 350);
 	}  
 	public static void main(String args[]){  
 		DagrInserterGUI f = new DagrInserterGUI();  
