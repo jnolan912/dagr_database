@@ -63,15 +63,15 @@ public class PostToPHP {
 		}
 	}
 	
-	public static void insertFolder(String path, boolean recursive, String categoryID) {
+	public static void insertFolder(String path, boolean recursive, String category) {
 		Iterator<File> filesIterator = FileUtils.iterateFiles(new File(path), null, recursive);
 		while (filesIterator.hasNext()) {
 			File file = filesIterator.next();
-			insertFileIntoDB(file.getAbsolutePath(), categoryID);
+			insertFileIntoDB(file.getAbsolutePath(), category);
 		}
 	}
 	
-	public static String getCategory(String categoryPath) {
+	public static void getCategory(String categoryPath) {
 		try {
 			URL url = new URL("http://localhost/xampp_dagr_database/php/create_category.php");
 			URLConnection con = url.openConnection();
@@ -101,15 +101,13 @@ public class PostToPHP {
 	                new InputStreamReader(
 	                http.getInputStream()));
 	        String str;
-	        String result = "";
+	        String result;
 			while((str = in.readLine()) != null) {
 				result += str;
 			}
-			return result;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return null;
 		}
 	}
 	

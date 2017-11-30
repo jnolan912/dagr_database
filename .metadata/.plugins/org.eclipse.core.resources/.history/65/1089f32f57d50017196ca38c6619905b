@@ -63,53 +63,11 @@ public class PostToPHP {
 		}
 	}
 	
-	public static void insertFolder(String path, boolean recursive, String categoryID) {
+	public static void insertFolder(String path, boolean recursive, String category) {
 		Iterator<File> filesIterator = FileUtils.iterateFiles(new File(path), null, recursive);
 		while (filesIterator.hasNext()) {
 			File file = filesIterator.next();
-			insertFileIntoDB(file.getAbsolutePath(), categoryID);
-		}
-	}
-	
-	public static String getCategory(String categoryPath) {
-		try {
-			URL url = new URL("http://localhost/xampp_dagr_database/php/create_category.php");
-			URLConnection con = url.openConnection();
-			HttpURLConnection http = (HttpURLConnection)con;
-			http.setRequestMethod("POST");
-			http.setDoOutput(true);
-			
-			Map<String,String> arguments = new HashMap<>();
-	
-			arguments.put("categoryPath", categoryPath);
-	
-			StringJoiner sj = new StringJoiner("&");
-			for(Map.Entry<String,String> entry : arguments.entrySet()) {
-			    sj.add(URLEncoder.encode(entry.getKey(), "UTF-8") + "=" 
-			         + URLEncoder.encode(entry.getValue(), "UTF-8"));
-			}
-			byte[] out = sj.toString().getBytes(StandardCharsets.UTF_8);
-			int length = out.length;
-					
-			http.setFixedLengthStreamingMode(length);
-			http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-			http.connect();
-			try(OutputStream os = http.getOutputStream()) {
-			    os.write(out);
-			}
-			BufferedReader in = new BufferedReader(
-	                new InputStreamReader(
-	                http.getInputStream()));
-	        String str;
-	        String result = "";
-			while((str = in.readLine()) != null) {
-				result += str;
-			}
-			return result;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
+			insertFileIntoDB(file.getAbsolutePath(), category);
 		}
 	}
 	

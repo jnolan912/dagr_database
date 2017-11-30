@@ -38,7 +38,7 @@ public class DagrInserterGUI {
 	    submitAddFile.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent ae) {
 	    		String categoryID = PostToPHP.getCategory(categoryTextField.getText());
-	    		PostToPHP.insertFileIntoDB(selectedFileTextField.getText(), categoryID);
+	    		//PostToPHP.insertFileIntoDB(selectedFileTextField.getText(), categoryTextField.getText());
 	    	}
 	    });
 	    
@@ -90,7 +90,7 @@ public class DagrInserterGUI {
 	    submitAddFolder.addActionListener(new ActionListener() {
 	    	public void actionPerformed(ActionEvent ae) {
 	    		String categoryID = PostToPHP.getCategory(categoryTextField.getText());
-	    		PostToPHP.insertFolder(selectedFolderTextField.getText(), includeSubdirectories.isSelected(), categoryID);
+	    		PostToPHP.insertFolder(selectedFolderTextField.getText(), includeSubdirectories.isSelected(), categoryTextField.getText());
 	    	}
 	    });
 

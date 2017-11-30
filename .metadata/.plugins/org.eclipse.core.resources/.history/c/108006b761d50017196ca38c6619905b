@@ -63,11 +63,11 @@ public class PostToPHP {
 		}
 	}
 	
-	public static void insertFolder(String path, boolean recursive, String categoryID) {
+	public static void insertFolder(String path, boolean recursive, String category) {
 		Iterator<File> filesIterator = FileUtils.iterateFiles(new File(path), null, recursive);
 		while (filesIterator.hasNext()) {
 			File file = filesIterator.next();
-			insertFileIntoDB(file.getAbsolutePath(), categoryID);
+			insertFileIntoDB(file.getAbsolutePath(), category);
 		}
 	}
 	
